@@ -59,11 +59,11 @@ int printMenu()
     printf("\t\t4 - Listar produtos\n");
     printf("\t\t5 - Listar produtos a comprar\n");
     printf("\t\t6 - Registrar entrada de produto\n");
-    printf("\t\t7 - Registrar sa√≠da de produto\n");
+    printf("\t\t7 - Registrar saÌda de produto\n");
     printf("\t\t8 - Procurar por um produto\n");
     printf("\t\t9 - Sair\n");
     printFooter("Menu");
-    printf("\t\tEscolha uma op√ß√£o: ");
+    printf("\t\tEscolha uma opÁ„o: ");
     scanf("%d", &option);
 
     return option;
@@ -101,7 +101,7 @@ void redirectPage(int option)
         printf("\n\t\t");
         break;
     default:
-        printf("\n\t\tC√≥digo inv√°lido!");
+        printf("\n\t\tCÛdigo invp·lido!");
         system("cls");
         main();
     }
@@ -142,7 +142,7 @@ int addProduct()
             return main();
         }
 
-        printf("\t\tDigite o c√≥digo: ");
+        printf("\t\tDigite o cÛdigo: ");
         scanf("%s", codeNumber);
         fflush(stdin);
 
@@ -150,9 +150,9 @@ int addProduct()
         {
             if (strcmp(productInfo.codeNumber, codeNumber) == 0)
             {
-                printf("\n\n\t    _________________________________________________________________________________\n");
-                printf("\n\t\tO c√≥digo digitado j√° existe!! Verifique e tente novamente.");
-                printf("\n\n\t    _________________________________________________________________________________\n\n\t\t");
+                printf("\n\n\t _________________________________________________________________________________\n");
+                printf("\n\t\tO cÛdigo digitado j· existe!! Verifique e tente novamente.");
+                printf("\n\n\t _________________________________________________________________________________\n\n\t\t");
                 system("pause");
                 return main();
             }
@@ -160,16 +160,16 @@ int addProduct()
         fclose(filePointerRead);
         strcpy(productInfo.codeNumber, codeNumber);
 
-        printf("\n\t\tDigite a descri√ß√£o: ");
+        printf("\n\t\tDigite a descriÁ„o: ");
         gets(productInfo.description);
         fflush(stdin);
         printf("\n\t\tDigite o grupo: ");
         gets(productInfo.group);
         fflush(stdin);
-        printf("\n\t\tDigite a localiza√ß√£op: ");
+        printf("\n\t\tDigite a localizaÁ„o: ");
         gets(productInfo.localization);
         fflush(stdin);
-        printf("\n\t\tDigite o estoque m√≠nimo: ");
+        printf("\n\t\tDigite o estoque mÌnimo: ");
         scanf("%f", &productInfo.minimumStock);
         fflush(stdin);
         printf("\n\t\tDigite a unidade de medida: ");
@@ -180,9 +180,9 @@ int addProduct()
         fwrite(&productInfo, sizeof(Product), 1, filePointerAppend);
         fclose(filePointerAppend);
 
-        printf("\n\n\t   _________________________________________________________________________________ \n");
+        printf("\n\n\t_________________________________________________________________________________\n");
         printf("\n\t\tProduto cadastrado com sucesso!");
-        printf("\n\n\t   _________________________________________________________________________________ \n\n");
+        printf("\n\n\t_________________________________________________________________________________\n\n");
         printFooter("Cadastro de produto");
 
         printf("\t\tQuer cadastrar mais um produto? (S/N): ");
@@ -196,7 +196,7 @@ int addProduct()
 }
 
 void displayMemoryError(){
-    printf("\n\t\tErro ao alocar mem√≥ria!");
+    printf("\n\t\tErro ao alocar memÛria!");
     system("pause");
     main();
 }
@@ -216,9 +216,9 @@ int deleteProduct()
     do
     {
         found = 0;
-        printHeader("Exclus√£o de Produto");
+        printHeader("Exclus„o de Produto");
 
-        printf("\t\tDigite o c√≥digo do item que deseja excluir: ");
+        printf("\t\tDigite o cÛdigo do item que deseja excluir: ");
         scanf("%s", codeNumber);
         fflush(stdin);
         printf("\n\t\tTem certeza disso? (S/N): ");
@@ -256,18 +256,18 @@ int deleteProduct()
             rename("temp.txt", DATABASE);
             printf("\n\n\t_________________________________________________________________________________\n");
 
-            printf("\n\t\tProduto exclu√≠do com sucesso!");
+            printf("\n\t\tProduto excluÌdo com sucesso!");
             printf("\n\n\t_________________________________________________________________________________\n\n");
         }
         if (found == 0)
         {
             remove("temp.txt");
             printf("\n\n\t_________________________________________________________________________________\n");
-            printf("\n\t\tErro: Produto n√£o encontrado!");
+            printf("\n\t\tErro: Produto n„o encontrado!");
             printf("\n\n\t_________________________________________________________________________________\n\n");
         }
 
-        printFooter("Exclus√£o de Produto");
+        printFooter("Exclus„o de Produto");
         printf("\n\t\tDeseja excluir outro produto? (S/N): ");
         scanf("%c", &deleteAnother);
         fflush(stdin);
@@ -298,13 +298,13 @@ int listProducts()
     {
         printf("\n\t\t Item %d\n", item);
         printf("\t_______________________________________________________________________________\n\n");
-        printf("\t\tC√≥digo: %s\n", productInfo.codeNumber);
-        printf("\t\tDescri√ß√£o: %s\n", productInfo.description);
+        printf("\t\tCÛdigo: %s\n", productInfo.codeNumber);
+        printf("\t\tDescriÁ„oo: %s\n", productInfo.description);
         printf("\t\tGrupo: %s\n", productInfo.group);
-        printf("\t\tLocaliza√ß√£o: %s\n", productInfo.localization);
-        printf("\t\tEstoque m√≠nimo: %0.2f\n", productInfo.minimumStock);
+        printf("\t\tLocalizaÁ„o: %s\n", productInfo.localization);
+        printf("\t\tEstoque mÌnimo: %0.2f\n", productInfo.minimumStock);
         printf("\t\tUnidade de medida: %s\n", productInfo.unitMeasurement);
-        printf("\t\tEstoque f√≠sico: %0.2f\n", productInfo.quantity);
+        printf("\t\tEstoque fÌsico: %0.2f\n", productInfo.quantity);
         printf("\n\t_______________________________________________________________________________\n");
         item++;
     }
@@ -335,10 +335,10 @@ int listProductsToBuy()
         if (productInfo.quantity < productInfo.minimumStock)
         {
             printf("\n\t__________________________________________________________________________________________\n\n");
-            printf("\t\tC√≥digo: %s\n", productInfo.codeNumber);
-            printf("\t\tDescri√ß√£oo: %s\n", productInfo.description);
+            printf("\t\tCÛdigo: %s\n", productInfo.codeNumber);
+            printf("\t\tDescriÁ„o: %s\n", productInfo.description);
             printf("\t\tUnidade de medida: %s\n", productInfo.unitMeasurement);
-            printf("\t\tEstoque m√≠nimo: %0.2f\n", productInfo.minimumStock);
+            printf("\t\tEstoque mÌnimo: %0.2f\n", productInfo.minimumStock);
             printf("\t\tQuantidade em estoque: %0.2f\n", productInfo.quantity);
             printf("\t\tStatus: Comprar\n");
             printf("\n\t__________________________________________________________________________________________\n");
@@ -364,7 +364,10 @@ void registerExit()
 
 int registerMovimentation(char movType[10])
 {
-    char codeNumber[CODEN_LEN];
+    char *codeNumber;
+    codeNumber = malloc(sizeof(char *) * CODEN_LEN);
+    if (!codeNumber) displayMemoryError();
+
     float quantity;
     char anotherEntry;
     FILE *filePointer;
@@ -378,12 +381,12 @@ int registerMovimentation(char movType[10])
         }
         else if (strcmp(movType, "exit") == 0)
         {
-            printHeader("Registrar sa√≠da");
+            printHeader("Registrar saÌda");
         }
 
         int id = 0;
         int found = 0;
-        printf("\n\t\tDigite o c√≥digo do produto: ");
+        printf("\n\t\tDigite o cÛdigo do produto: ");
         scanf("%s", codeNumber);
         fflush(stdin);
 
@@ -393,7 +396,7 @@ int registerMovimentation(char movType[10])
         }
         else if ((strcmp(movType, "exit") == 0))
         {
-            printf("\n\n\t\tDigite a quantidade a ser subtra√≠da: ");
+            printf("\n\n\t\tDigite a quantidade a ser subtraÌda: ");
         }
         scanf("%f", &quantity);
         fflush(stdin);
@@ -422,9 +425,9 @@ int registerMovimentation(char movType[10])
                 fseek(filePointer, id * sizeof(Product), SEEK_SET);
                 fwrite(&productInfo, sizeof(Product), 1, filePointer);
 
-                printf("\n\n\t_______________________________________________________________________\n");
-                printf("\n\t\tMovimenta√ß√£o realizada com sucesso!");
-                printf("\n\n\t_______________________________________________________________________\n");
+                printf("\n\n\t_________________________________________________________________________________\n");
+                printf("\n\t\tMovimentaÁ„o realizada com sucesso!");
+                printf("\n\n\t_________________________________________________________________________________\n");
 
                 found = 1;
                 break;
@@ -436,7 +439,7 @@ int registerMovimentation(char movType[10])
         if (found == 0)
         {
             printf("\n\n\t_______________________________________________________________________\n");
-            printf("\n\t\tProduto n√£o encontrado!\n\n\t\t");
+            printf("\n\t\tProduto n„o encontrado!\n\n\t\t");
             printf("\n\n\t_______________________________________________________________________\n");
             system("pause");
             return main();
@@ -451,28 +454,31 @@ int registerMovimentation(char movType[10])
         }
         else if (strcmp(movType, "exit") == 0)
         {
-            printf("\n\n\t\tDeseja cadastrar mais uma sa√≠da? (S/N): ");
+            printf("\n\n\t\tDeseja cadastrar mais uma saÌda? (S/N): ");
         }
         scanf("%c", &anotherEntry);
         
     } while (anotherEntry == 's' || anotherEntry == 'S');
 
+    free(codeNumber);
     return main();
 }
 
 int editProduct()
 {
-
     int id;
     int found;
     char editAnother;
-    char codeNumber[CODEN_LEN];
+    char *codeNumber;
+    codeNumber = malloc(sizeof(char *) * CODEN_LEN);
+    if (!codeNumber) displayMemoryError();
+
     Product productInfo;
     FILE *filePointer;
 
     do
     {
-        printHeader("Edi√ß√£o de produtos");
+        printHeader("EdiÁ„o de produtos");
         id = 0;
         found = 0;
 
@@ -483,7 +489,7 @@ int editProduct()
             return main();
         }
 
-        printf("\t\tDigite o c√≥digo que deseja alterar: ");
+        printf("\t\tDigite o cÛdigo que deseja alterar: ");
         scanf("%s", codeNumber);
         fflush(stdin);
 
@@ -493,16 +499,16 @@ int editProduct()
             {
                 printf("\n\n\t_______________________________________________________________________________\n\n");
 
-                printf("\t\tC√≥digo: %s\n\n", productInfo.codeNumber);
-                printf("\t\tDescri√ß√£o: %s\n", productInfo.description);
+                printf("\t\tCÛdigo: %s\n\n", productInfo.codeNumber);
+                printf("\t\tDescriÁ„o: %s\n", productInfo.description);
                 printf("\t\tGrupo: %s\n", productInfo.group);
                 printf("\t\tUnidade de medida: %s\n", productInfo.unitMeasurement);
-                printf("\t\tEstoque m√≠nimo: %2.f\n", productInfo.minimumStock);
-                printf("\t\tLocaliza√ß√£o: %s\n", productInfo.localization);
+                printf("\t\tEstoque mÌnimo: %2.f\n", productInfo.minimumStock);
+                printf("\t\tLocalizaÁ„o: %s\n", productInfo.localization);
 
                 printf("\n\n\t_______________________________________________________________________________\n\n");
 
-                printf("\n\t\tDigite a nova descri√ß√£o: ");
+                printf("\n\t\tDigite a nova descriÁ„o: ");
                 gets(productInfo.description);
                 fflush(stdin);
                 printf("\n\t\tDigite o novo grupo: ");
@@ -511,10 +517,10 @@ int editProduct()
                 printf("\n\t\tDigite a nova unidade de medida: ");
                 scanf("%s", productInfo.unitMeasurement);
                 fflush(stdin);
-                printf("\n\t\tDigite o novo estoque m√≠nimo: ");
+                printf("\n\t\tDigite o novo estoque mÌnimo: ");
                 scanf("%f", &productInfo.minimumStock);
                 fflush(stdin);
-                printf("\n\t\tDigite a nova localiza√ß√£o: ");
+                printf("\n\t\tDigite a nova localizaÁ„o: ");
                 gets(productInfo.localization);
                 fflush(stdin);
 
@@ -533,7 +539,7 @@ int editProduct()
         if (found == 0)
         {
             printf("\n\n\t_______________________________________________________________________________\n");
-            printf("\n\t\tProduto n√£o encontrado! Verifique e tente novamente.");
+            printf("\n\t\tProduto n„o encontrado! Verifique e tente novamente.");
             printf("\n\t_______________________________________________________________________________\n\n\t\t");
             system("pause");
             return main();
@@ -541,13 +547,14 @@ int editProduct()
 
         fclose(filePointer);
 
-        printFooter("Edi√ß√£o de produtos");
+        printFooter("EdiÁ„o de produtos");
 
         printf("\t\tDeseja editar outro produto? (S/N): ");
         scanf("%c", &editAnother);
         fflush(stdin);
     } while (editAnother == 's' || editAnother == 'S');
 
+    free(codeNumber);
     return main();
 }
 
@@ -555,7 +562,11 @@ int searchProduct()
 {
     Product productInfo;
     FILE *filePointer;
-    char codeNumber[CODEN_LEN];
+    char *codeNumber;
+    codeNumber = malloc(sizeof(char *) * CODEN_LEN);
+
+    if (!codeNumber) displayMemoryError();
+
     char option;
     int found;
 
@@ -571,7 +582,7 @@ int searchProduct()
             return main();
         }
 
-        printf("\n\t\tDigite o c√≥digo que deseja procurar: ");
+        printf("\n\t\tDigite o cÛdigo que deseja procurar: ");
         scanf("%s", codeNumber);
 
         while (fread(&productInfo, sizeof(Product), 1, filePointer))
@@ -579,9 +590,9 @@ int searchProduct()
             if (strcmp(productInfo.codeNumber, codeNumber) == 0)
             {
                 printf("\n\n\t__________________________________________________________________________________\n");
-                printf("\n\t\tDescri√ß√£o: %s", productInfo.description);
+                printf("\n\t\tDescriÁ„o: %s", productInfo.description);
                 printf("\n\t\tGrupo %s", productInfo.group);
-                printf("\n\t\tEstoque m√≠nimo: %0.2f", productInfo.minimumStock);
+                printf("\n\t\tEstoque mÌnimo: %0.2f", productInfo.minimumStock);
                 printf("\n\t\tQuantidade em estoque: %0.2f", productInfo.quantity);
                 printf("\n\t\tUnidade de medida: %s", productInfo.unitMeasurement);
                 printf("\n\n\t__________________________________________________________________________________\n\n");
@@ -593,7 +604,7 @@ int searchProduct()
         if (found == 0)
         {
             printf("\n\t__________________________________________________________________________________\n");
-            printf("\n\t\tProduto n√£o encontrado!!");
+            printf("\n\t\tProduto n„o encontrado!!");
             printf("\n\n\t__________________________________________________________________________________\n\n\t\t");
             system("pause");
             return main();
@@ -605,5 +616,6 @@ int searchProduct()
 
     } while (option == 's' || option == 'S');
 
+    free(codeNumber);
     return main();
 }
