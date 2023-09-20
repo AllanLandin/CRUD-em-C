@@ -22,6 +22,7 @@ typedef struct Product
     char unitMeasurement[UNIT_LEN];
 } Product;
 
+
 int printMenu();
 void printHeader(char screenName[30]);
 void printFooter(char screenName[50]);
@@ -121,9 +122,12 @@ void printFooter(char screenName[50])
 int addProduct()
 {
     char registerAnother;
-    char *codeNumber;
 
-    codeNumber = malloc(sizeof(char *) * CODEN_LEN);
+    // Variáveis utilizadas para realizar a alocação dinâmica
+    char *codeNumber, charactere;
+    int i = 0;
+
+    codeNumber = malloc(sizeof(char));
     if (!codeNumber) displayMemoryError();
 
     Product productInfo;
@@ -134,6 +138,7 @@ int addProduct()
     {
         printHeader("Cadastro de produto");
 
+
         filePointerAppend = fopen(DATABASE, "ab");
         filePointerRead = fopen(DATABASE, "rb");
         if (!filePointerAppend || !filePointerRead)
@@ -142,8 +147,24 @@ int addProduct()
             return main();
         }
 
+        fflush(stdin);
+
         printf("\t\tDigite o código: ");
-        scanf("%s", codeNumber);
+
+
+        // Alocação dinâmica de memória //
+        do
+        {
+            charactere = getc(stdin);
+            codeNumber[i] = charactere;
+            i++;
+            codeNumber = (char *)realloc(codeNumber, sizeof(char) * i);
+            if (!codeNumber) displayMemoryError();
+        } while (charactere != '\n');
+
+        codeNumber[i] = '\0';
+        // Alocação dinâmica de memória //
+
         fflush(stdin);
 
         while (fread(&productInfo, sizeof(Product), 1, filePointerRead))
@@ -195,7 +216,8 @@ int addProduct()
     return main();
 }
 
-void displayMemoryError(){
+void displayMemoryError()
+{
     printf("\n\t\tErro ao alocar memória!");
     system("pause");
     main();
@@ -204,10 +226,11 @@ void displayMemoryError(){
 int deleteProduct()
 {
     char *codeNumber;
-    codeNumber = malloc(sizeof(char*) * CODEN_LEN);
+    codeNumber = malloc(sizeof(char *) * CODEN_LEN);
 
-    if (!codeNumber) displayMemoryError();
-    
+    if (!codeNumber)
+        displayMemoryError();
+
     char confirmation;
     char deleteAnother;
     int found;
@@ -332,7 +355,7 @@ int listProductsToBuy()
     while (fread(&productInfo, sizeof(Product), 1, filePointer))
     {
 
-        if (productInfo.quantity < productInfo.minimumStock)
+        if (productInfo.quantity <= productInfo.minimumStock)
         {
             printf("\n\t__________________________________________________________________________________________\n\n");
             printf("\t\tCódigo: %s\n", productInfo.codeNumber);
@@ -366,7 +389,8 @@ int registerMovimentation(char movType[10])
 {
     char *codeNumber;
     codeNumber = malloc(sizeof(char *) * CODEN_LEN);
-    if (!codeNumber) displayMemoryError();
+    if (!codeNumber)
+        displayMemoryError();
 
     float quantity;
     char anotherEntry;
@@ -435,7 +459,6 @@ int registerMovimentation(char movType[10])
             id++;
         }
 
-
         if (found == 0)
         {
             printf("\n\n\t_______________________________________________________________________________\n");
@@ -446,7 +469,6 @@ int registerMovimentation(char movType[10])
         }
 
         fclose(filePointer);
-        
 
         if ((strcmp(movType, "entry") == 0))
         {
@@ -457,7 +479,7 @@ int registerMovimentation(char movType[10])
             printf("\n\n\t\tDeseja cadastrar mais uma saída? (S/N): ");
         }
         scanf("%c", &anotherEntry);
-        
+
     } while (anotherEntry == 's' || anotherEntry == 'S');
 
     free(codeNumber);
@@ -471,7 +493,8 @@ int editProduct()
     char editAnother;
     char *codeNumber;
     codeNumber = malloc(sizeof(char *) * CODEN_LEN);
-    if (!codeNumber) displayMemoryError();
+    if (!codeNumber)
+        displayMemoryError();
 
     Product productInfo;
     FILE *filePointer;
@@ -565,7 +588,8 @@ int searchProduct()
     char *codeNumber;
     codeNumber = malloc(sizeof(char *) * CODEN_LEN);
 
-    if (!codeNumber) displayMemoryError();
+    if (!codeNumber)
+        displayMemoryError();
 
     char option;
     int found;
